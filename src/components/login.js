@@ -1,5 +1,6 @@
 import React, { PropTypes as T } from 'react'
 import {ButtonToolbar, Button} from 'react-bootstrap'
+import { connect, dispatch } from 'react-router'
 import AuthService from '../utils/authservice'
 //import styles from './styles.module.css'
 

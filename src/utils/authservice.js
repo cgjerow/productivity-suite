@@ -4,9 +4,13 @@ import { browserHistory } from 'react-router'
 export default class AuthService {
   constructor(clientId, domain) {
     // Configure Auth0
+    if (location.hostname === "localhost" || location.hostname === "127.0.0.1")
+      var url = 'http://localhost:3000/dashboard'
+    else
+      var url = 'https://productivity-suite.herokuapp.com/'
     this.lock = new Auth0Lock(clientId, domain, {
       auth: {
-        redirectUrl: 'https://productivity-suite.herokuapp.com/',
+        redirectUrl: url,
         responseType: 'token'
       }
     })
@@ -20,7 +24,8 @@ export default class AuthService {
     // Saves the user token
     this.setToken(authResult.idToken)
     // navigate to the home route
-    browserHistory.replace('/home')
+    //browserHistory.replace('/dashboard')
+    location.reload()
   }
 
   login() {
@@ -28,9 +33,19 @@ export default class AuthService {
     this.lock.show()
   }
 
+  getToken() {
+      // Retrieves the user token from local storage
+      return localStorage.getItem('id_token')
+  }
+
   loggedIn() {
     // Checks if there is a saved token and it's still valid
-    return !!this.getToken()
+    if (this.getToken()==null) {
+      return false
+    }
+    else{
+      return true
+    }
   }
 
   setToken(idToken) {
@@ -38,13 +53,11 @@ export default class AuthService {
     localStorage.setItem('id_token', idToken)
   }
 
-  getToken() {
-    // Retrieves the user token from local storage
-    return localStorage.getItem('id_token')
-  }
 
   logout() {
     // Clear user token and profile data from local storage
     localStorage.removeItem('id_token');
+    //browserHistory.replace('/')
+    location.replace('/')
   }
 }

@@ -1,23 +1,23 @@
 import React, {Component} from 'react'
-import { Provider } from 'react-redux'
-import { createStore } from 'redux'
-import appReducer from './reducers'
+import { dispatch, connect } from 'react-redux'
+import { setAuth } from './actions/index'
 import Flexbox from 'flexbox-react'
 import Navbar from './components/navbar'
 import Content from './components/content'
 
-let store = createStore(appReducer)
-console.log(store.getState().pageId)
 class App extends Component {
   render(){
+    this.props.dispatch(setAuth(this.props.auth))
     return(
-      <Provider store={store}>
         <Flexbox flexDirection='row'>
           <Navbar/>
           <Content/>
         </Flexbox>
-      </Provider>
     )
   }
 }
-export default App
+
+const mapStateToProps = (state) => {
+}
+
+export default connect(mapStateToProps)(App)
