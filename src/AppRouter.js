@@ -21,7 +21,7 @@ const requireAuth = () => {
   if (auth.loggedIn()) {
     return app
   } else {
-    if(location.pathname!='/login')
+    if(location.pathname=='/dashboard')
       location.replace('/login')
     return null
   }
