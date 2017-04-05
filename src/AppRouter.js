@@ -36,8 +36,8 @@ class AppRouter extends Component {
         <Router history={browserHistory}>
           <div>
             <Route exact path='/' component={Home}/>
-                <Route path='/dashboard' component={requireAuth()}/>
-                <Route path='/login' component={login} />
+            <Route path='/dashboard' component={requireAuth()}/>
+            <Route path='/login' component={login} />
           </div>
         </Router>
       </Provider>
