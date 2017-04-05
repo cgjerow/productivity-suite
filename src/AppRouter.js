@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import { Provider, connect, dispatch } from 'react-redux'
 import { createStore } from 'redux'
 import appReducer from './reducers'
-import { Router, IndexRoute, browserHistory, Route } from 'react-router'
+import { Router, IndexRoute, Route } from 'react-router'
+import { HashRouter } from 'react-router-dom'
 import { createBrowserHistory } from 'history'
 import App from './App'
 import AuthService from './utils/authservice'
@@ -44,13 +45,13 @@ class AppRouter extends Component {
   render() {
     return (
       <Provider store={store}>
-        <Router history={createBrowserHistory()}>
+        <HashRouter>
           <div>
             <Route exact path='/' component={Home}/>
             <Route path='/dashboard' component={requireAuth()}/>
             <Route path='/login' component={login} />
-          </div>
-        </Router>
+            </div>
+        </HashRouter>
       </Provider>
     )
   }

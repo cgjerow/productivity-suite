@@ -5,7 +5,7 @@ import { Button } from 'react-bootstrap'
 
 class Home extends Component{
   toLogin = () => {
-    location.replace('/login')
+    location.replace('/#login')
   }
 
   render() {

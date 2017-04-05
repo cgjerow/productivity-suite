@@ -5,7 +5,7 @@ export default class AuthService {
   constructor(clientId, domain) {
     // Configure Auth0
     if (location.hostname === "localhost" || location.hostname === "127.0.0.1")
-      var url = 'http://localhost:3000/dashboard'
+      var url = 'http://localhost:3000/#/dashboard'
     else
       var url = 'https://productivity-suite.herokuapp.com/'
     this.lock = new Auth0Lock(clientId, domain, {
