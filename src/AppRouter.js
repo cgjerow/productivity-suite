@@ -2,19 +2,31 @@ import React, { Component } from 'react'
 import { Provider, connect, dispatch } from 'react-redux'
 import { createStore } from 'redux'
 import appReducer from './reducers'
-import {
-  BrowserRouter as Router,
-  Link
-} from 'react-router-dom'
-import { browserHistory, Route, Redirect, Switch } from 'react-router'
+import { Router, IndexRoute, browserHistory, Route } from 'react-router'
+import { createBrowserHistory } from 'history'
 import App from './App'
 import AuthService from './utils/authservice'
-//import Container from './Container'
+
 import Login from './components/login'
 import Home from './components/public/home'
+import Template from './pages/template'
+
+
 
 let store = createStore(appReducer)
 const auth = new AuthService('K0VloKxRbT9oNGRgiI162xna95ERSbUS', 'productivity-suite.auth0.com');
+
+const login = React.createClass({
+  render: function() {
+  return (
+  <Login auth={auth}/>
+)}})
+
+const app = React.createClass({
+  render: function() {
+  return (
+  <App auth={auth}/>
+)}})
 
 // validate authentication for private routes
 const requireAuth = () => {
@@ -27,13 +39,12 @@ const requireAuth = () => {
   }
 }
 
-
 class AppRouter extends Component {
 
   render() {
     return (
       <Provider store={store}>
-        <Router history={browserHistory}>
+        <Router history={createBrowserHistory()}>
           <div>
             <Route exact path='/' component={Home}/>
             <Route path='/dashboard' component={requireAuth()}/>
@@ -45,14 +56,6 @@ class AppRouter extends Component {
   }
 }
 
-const login = () => {
-  return (
-  <Login auth={auth}/>
-)}
 
-const app = () => {
-  return(
-    <App auth={auth}/>
-)}
 
 export default AppRouter
