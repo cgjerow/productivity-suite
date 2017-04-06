@@ -5,12 +5,13 @@ import { Button } from 'react-bootstrap'
 
 class Home extends Component{
   toLogin = () => {
+    history.pushState(null,null,'/')
     location.replace('/login')
   }
 
   render() {
     return(
-    <div>HELLLOOO
+    <div>Sup Nerd
     <Button onClick={this.toLogin}>Login</Button>
     </div>
   )}
