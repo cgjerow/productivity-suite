@@ -18,7 +18,7 @@
     "react-scripts": "0.9.4"
   },
   "scripts": {
-    "start": "npm run build && node server",
+    "start": "react-scripts-build && node server",
     "start:server": "node server",
     "run": "react-scripts start",
     "build": "react-scripts build",
