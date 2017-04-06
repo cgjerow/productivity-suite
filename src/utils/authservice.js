@@ -5,9 +5,9 @@ export default class AuthService {
   constructor(clientId, domain) {
     // Configure Auth0
     if (location.hostname === "localhost" || location.hostname === "127.0.0.1")
-      var url = 'http://localhost:3000/#/dashboard'
+      var url = 'http://localhost:3000/dashboard'
     else
-      var url = 'https://productivity-suite.herokuapp.com/'
+      var url = 'https://productivity-suite.herokuapp.com/dashboard'
     this.lock = new Auth0Lock(clientId, domain, {
       auth: {
         redirectUrl: url,
@@ -24,9 +24,9 @@ export default class AuthService {
     // Saves the user token
     this.setToken(authResult.idToken)
     // navigate to the home route
-    //browserHistory.replace('/dashboard')
-    location.reload()
-  }
+    browserHistory.replace('/dashboard')
+    //location.replace('/dashboard')
+   }
 
   login() {
     // Call the show method to display the widget.
@@ -58,6 +58,6 @@ export default class AuthService {
     // Clear user token and profile data from local storage
     localStorage.removeItem('id_token');
     //browserHistory.replace('/')
-    location.replace('/')
+    //location.replace('/')
   }
 }
